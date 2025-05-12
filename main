@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Чистый Дом — Химчистка</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto :wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Roboto', sans-serif; line-height: 1.6; background: #fff; color: #333; }
+    header { position: relative; height: 100vh; overflow: hidden; }
+    .video-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 100, 0.6);
+      z-index: 0;
+    }
+    .hero-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 1;
+    }
+    .hero-text h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .btn { display: inline-block; padding: 15px 30px; background: #00bfff; color: #fff; text-decoration: none; font-weight: bold; border-radius: 5px; }
+    section { padding: 60px 20px; max-width: 1000px; margin: auto; }
+    .services, .features, .calculator { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-around; }
+    .service, .feature, .calc-item { flex: 1 1 300px; background: #f9f9f9; padding: 20px; border-radius: 10px; }
+    form input, form select, form textarea, form button {
+      width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;
+    }
+    footer { text-align: center; padding: 20px; background: #003366; color: white; }
+    @media (max-width: 768px) {
+      .services, .features, .calculator { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<header>
+  <video class="video-bg" autoplay muted loop>
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4 " type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay"></div>
+  <div class="hero-text">
+    <h1>Профессиональная химчистка рядом с вами</h1>
+    <a href="#booking" class="btn">Записаться сейчас</a>
+  </div>
+</header>
+
+<!-- Services -->
+<section id="services">
+  <h2>Наши услуги</h2>
+  <div class="services">
+    <div class="service"><h3>Чистка верхней одежды</h3><p>от 500 ₽</p></div>
+    <div class="service"><h3>Чистка обуви</h3><p>от 300 ₽</p></div>
+    <div class="service"><h3>Чистка ковров</h3><p>от 1000 ₽</p></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section>
+  <h2>Почему выбирают нас?</h2>
+  <div class="features">
+    <div class="feature">✅ Быстро и качественно</div>
+    <div class="feature">✅ Выезд на дом</div>
+    <div class="feature">✅ Современные технологии</div>
+  </div>
+</section>
+
+<!-- Calculator -->
+<section>
+  <h2>Рассчитайте стоимость</h2>
+  <div class="calculator">
+    <div class="calc-item">
+      <label>Тип услуги:</label>
+      <select id="serviceType">
+        <option value="1">Верхняя одежда — 500 ₽</option>
+        <option value="2">Обувь — 300 ₽</option>
+        <option value="3">Ковры — 1000 ₽</option>
+      </select>
+      <label>Количество:</label>
+      <input type="number" id="quantity" value="1" min="1" />
+      <button onclick="calculate()">Рассчитать</button>
+      <p id="totalPrice"></p>
+    </div>
+  </div>
+</section>
+
+<!-- Booking -->
+<section id="booking">
+  <h2>Онлайн-запись</h2>
+  <form action="send.php" method="post">
+    <input type="text" name="name" placeholder="Имя" required />
+    <input type="tel" name="phone" placeholder="Телефон" required />
+    <select name="service">
+      <option value="Химчистка">Химчистка</option>
+      <option value="Доставка">Выезд на дом</option>
+    </select>
+    <input type="date" name="date" required />
+    <input type="time" name="time" required />
+    <textarea name="address" placeholder="Адрес доставки (если нужен)"></textarea>
+    <button type="submit">Отправить заявку</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Чистый Дом | Телеграм: @yourcleanbot | Телефон: +7 (XXX) XXX-XX-XX</p>
+</footer>
+
+<script>
+function calculate() {
+  const priceMap = [0, 500, 300, 1000];
+  const service = parseInt(document.getElementById('serviceType').value);
+  const quantity = parseInt(document.getElementById('quantity').value);
+  const total = priceMap[service] * quantity;
+  document.getElementById('totalPrice').innerText = `Итого: ${total} ₽`;
+}
+</script>
+
+</body>
+</html>
